@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring"></constant>
+    <package name="default" namespace="/" extends="struts-default,json-default">		
+		<action name="userlogin" class="actions.Userlogin" method="execute">
+			<result name="success">/index.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		 <action name="index" class="userindex" method="userdenlu">
+        	<result name="success">/index.jsp</result>
+        	<result name="input">/login.jsp</result>
+        </action>
+		<action name="user_*" class="loginaction" method="user{1}">
+			<result name="success" type="json">
+				<param name="root">dataMap</param>
+			</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		
+    </package>
+
+</struts>
